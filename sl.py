@@ -88,7 +88,7 @@ with col3:
 with col4:
     W = st.number_input(
         "W (positive value):",
-        min_value=0.05, max_value=1.0, value=0.1, step=0.05,
+        min_value=0.001, max_value=1.0, value=0.1, step=0.05,
         help="The width (W) parameter sets the tolerance for the interval of the sensitivity and specificity estimates."
     )
 
