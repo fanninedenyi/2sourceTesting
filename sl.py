@@ -9,8 +9,8 @@ def compute_values(sensitivity, specificity, alpha, W, prevalence_group1, preval
     Z = stats.norm.ppf(1 - alpha / 2)
 
     # Compute M1 and M2
-    M1 = math.ceil((Z ** 2 * sensitivity * (1 - sensitivity)) / W ** 2)
-    M2 = math.ceil((Z ** 2 * specificity * (1 - specificity)) / W ** 2)
+    M1 = ((Z ** 2 * sensitivity * (1 - sensitivity)) / W ** 2)
+    M2 = ((Z ** 2 * specificity * (1 - specificity)) / W ** 2)
 
     # Compute the ideal proportion of sick people
     ideal_proportion = M1 / (M1 + M2)
