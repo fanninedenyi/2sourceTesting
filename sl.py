@@ -66,13 +66,13 @@ col1, col2 = st.columns(2)
 with col1:
     sensitivity = st.number_input(
         "Sensitivity (0 to 1):",
-        min_value=0.0, max_value=1.0, value=0.95, step=0.05,
+        min_value=0.0, max_value=1.0, value=0.99, step=0.01,
         help="Sensitivity refers to the probability that a diagnostic tool correctly identifies a sick individual as sick."
     )
 with col2:
     specificity = st.number_input(
         "Specificity (0 to 1):",
-        min_value=0.0, max_value=1.0, value=0.9, step=0.05,
+        min_value=0.0, max_value=1.0, value=0.99, step=0.01,
         help="Specificity refers to the probability that a diagnostic tool correctly identifies a healthy individual as healthy."
     )
 
@@ -81,14 +81,14 @@ col3, col4 = st.columns(2)
 with col3:
     alpha = st.number_input(
         "Significance level alpha (0 to 1):",
-        min_value=0.0, max_value=1.0, value=0.1, step=0.05,
+        min_value=0.0, max_value=1.0, value=0.05, step=0.05,
         help="The significance level (alpha) is the probability of rejecting the null hypothesis when it is true. "
              "A common choice is 0.05 (5% significance level)."
     )
 with col4:
     W = st.number_input(
         "W (positive value):",
-        min_value=0.001, max_value=1.0, value=0.1, step=0.05,
+        min_value=0.001, max_value=1.0, value=0.01, step=0.01,
         help="The width (W) parameter sets the tolerance for the interval of the sensitivity and specificity estimates."
     )
 
@@ -97,13 +97,13 @@ col5, col6 = st.columns(2)
 with col5:
     prevalence_group1 = st.number_input(
         "Prevalence in group 1 (0 to 1):",
-        min_value=0.0, max_value=1.0, value=0.2, step=0.05,
+        min_value=0.0, max_value=1.0, value=0.1, step=0.05,
         help="Prevalence is the proportion of sick individuals in the first population."
     )
 with col6:
     prevalence_group2 = st.number_input(
         "Prevalence in group 2 (0 to 1):",
-        min_value=0.0, max_value=1.0, value=0.5, step=0.05,
+        min_value=0.0, max_value=1.0, value=0.65, step=0.05,
         help="Prevalence is the proportion of sick individuals in the second population."
     )
 
