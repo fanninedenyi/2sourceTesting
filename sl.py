@@ -10,7 +10,9 @@ def compute_values(sensitivity, specificity, alpha, W, prevalence_group1, preval
 
     # Compute M1 and M2
     M1 = ((Z ** 2 * sensitivity * (1 - sensitivity)) / W ** 2)
+    print(M1)
     M2 = ((Z ** 2 * specificity * (1 - specificity)) / W ** 2)
+    print(M2)
 
     # Compute the ideal proportion of sick people
     ideal_proportion = M1 / (M1 + M2)
