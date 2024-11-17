@@ -169,4 +169,14 @@ if st.button("Calculate") and valid_input:
         """, unsafe_allow_html=True)
     with col8:
         st.markdown(f"""
-        <div style="border: 2px solid #2196F3
+        <div style="border: 2px solid #2196F3; padding: 10px; border-radius: 10px;">
+            <h3 style="text-align: center; color: #2196F3;">People from Group 2</h3>
+            <h1 style="text-align: center;">{people_from_group2}</h1>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div style="background-color: #FFC107; padding: 15px; border-radius: 10px; margin-top: 20px;">
+        <h2 style="text-align: center; color: #000;">Gain from using both sources: <b>{gain}</b></h2>
+    </div>
+    """, unsafe_allow_html=True)
