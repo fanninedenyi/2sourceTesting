@@ -38,6 +38,23 @@ st.title("Test Accuracy Calculator")
 # Choice between modes
 mode = st.radio("Select input mode:", options=["Interval", "Threshold"])
 
+# Explanation for the modes
+if mode == "Interval":
+    st.markdown("""
+    **Interval Mode**: This mode uses an interval for the estimates of sensitivity and specificity. 
+    You input the values for sensitivity and specificity along with their widths (W), which represent the tolerance or uncertainty in these estimates. 
+    If you'd like, you can specify different widths for sensitivity and specificity.
+    This mode is useful when you want to consider ranges for the accuracy values (sensitivity and specificity) rather than fixed points.
+    """)
+    
+else:
+    st.markdown("""
+    **Threshold Mode**: This mode allows you to set a threshold for sensitivity and specificity. 
+    The thresholds are the minimum acceptable values for these metrics. 
+    Based on these thresholds, the corresponding sensitivity, specificity, and widths are calculated automatically. 
+    This mode is useful when you want to focus on values that exceed a certain threshold, typically for high-confidence estimates.
+    """)
+
 if mode == "Interval":  # Interval mode
     st.subheader("Interval Mode")
     col1, col2 = st.columns(2)
@@ -152,14 +169,4 @@ if st.button("Calculate") and valid_input:
         """, unsafe_allow_html=True)
     with col8:
         st.markdown(f"""
-        <div style="border: 2px solid #2196F3; padding: 10px; border-radius: 10px;">
-            <h3 style="text-align: center; color: #2196F3;">People from Group 2</h3>
-            <h1 style="text-align: center;">{people_from_group2}</h1>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div style="background-color: #FFC107; padding: 15px; border-radius: 10px; margin-top: 20px;">
-        <h2 style="text-align: center; color: #000;">Gain from using both sources: <b>{gain}</b></h2>
-    </div>
-    """, unsafe_allow_html=True)
+        <div style="border: 2px solid #2196F3
