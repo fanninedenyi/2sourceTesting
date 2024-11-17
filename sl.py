@@ -43,10 +43,6 @@ if mode == "Interval":  # Interval mode
     st.markdown("""
     **In this mode, you enter a range (width) for sensitivity and specificity,** 
     which helps calculate the necessary number of individuals for each group.
-    
-    Sensitivity refers to the probability that a diagnostic tool correctly identifies a sick individual as sick. 
-    Specificity refers to the probability that a diagnostic tool correctly identifies a healthy individual as healthy. 
-    The width parameter (W) sets the tolerance for each of these estimates.
     """)
     
     col1, col2 = st.columns(2)
