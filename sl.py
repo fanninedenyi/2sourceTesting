@@ -40,10 +40,8 @@ mode = st.radio("Select input mode:", options=["Interval", "Threshold"])
 
 if mode == "Interval":  # Interval mode
     st.subheader("Interval Mode")
-    st.markdown("""
-    <p style="font-size: 14px; color: #888;">In this mode, you enter a range (width) for sensitivity and specificity. It helps calculate the necessary number of individuals for each group based on the sensitivity and specificity estimates.</p>
-    """, unsafe_allow_html=True)
-
+    st.help("In this mode, you enter a range (width) for sensitivity and specificity, which helps calculate the necessary number of individuals for each group.")
+    
     col1, col2 = st.columns(2)
     with col1:
         sensitivity = st.number_input(
@@ -66,19 +64,36 @@ if mode == "Interval":  # Interval mode
             help="The significance level (alpha) is the probability of rejecting the null hypothesis when it is true. "
                  "A common choice is 0.05 (5% significance level)."
         )
-    with col4:
+
+    # Option to choose different widths for sensitivity and specificity
+    use_different_widths = st.checkbox("Use different width values for Sensitivity and Specificity?")
+    
+    if use_different_widths:
+        col5, col6 = st.columns(2)
+        with col5:
+            W_sens = st.number_input(
+                "Width for Sensitivity (W_sens, positive value):",
+                min_value=0.001, max_value=1.0, value=0.01, step=0.01,
+                help="The width parameter for sensitivity sets the tolerance for its interval estimate."
+            )
+        with col6:
+            W_spec = st.number_input(
+                "Width for Specificity (W_spec, positive value):",
+                min_value=0.001, max_value=1.0, value=0.01, step=0.01,
+                help="The width parameter for specificity sets the tolerance for its interval estimate."
+            )
+    else:
         W = st.number_input(
-            "W (positive value):",
+            "Width (W, positive value):",
             min_value=0.001, max_value=1.0, value=0.01, step=0.01,
-            help="The width (W) parameter sets the tolerance for the interval of the sensitivity and specificity estimates."
+            help="The width (W) parameter sets the tolerance for both sensitivity and specificity estimates."
         )
-    W_sens = W
-    W_spec = W
+        W_sens = W
+        W_spec = W
+
 else:  # Threshold mode
     st.subheader("Threshold Mode")
-    st.markdown("""
-    <p style="font-size: 14px; color: #888;">In this mode, you specify a minimum threshold for sensitivity and specificity, which will be converted into actual sensitivity and specificity values and their respective width values.</p>
-    """, unsafe_allow_html=True)
+    st.help("In this mode, you set a threshold for sensitivity and specificity. These thresholds are used to calculate the necessary sample sizes.")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -144,13 +159,8 @@ if st.button("Calculate") and valid_input:
     with col8:
         st.markdown(f"""
         <div style="border: 2px solid #2196F3; padding: 10px; border-radius: 10px;">
-            <h3 style="text-align: center; color: #2196F3;">People from Group 2</h3>
-            <h1 style="text-align: center;">{people_from_group2}</h1>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div style="background-color: #FFC107; padding: 15px; border-radius: 10px; margin-top: 20px;">
-        <h2 style="text-align: center; color: #000;">Gain from using both sources: <b>{gain}</b></h2>
+            <h3 style="text-align:
+                    <h3 style="text-align: center; color: #FFC107;">Estimated Gain</h3>
+        <h2 style="text-align: center;">{gain} individuals</h2>
     </div>
     """, unsafe_allow_html=True)
