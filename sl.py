@@ -38,25 +38,11 @@ st.title("Test Accuracy Calculator")
 # Choice between modes
 mode = st.radio("Select input mode:", options=["Interval", "Threshold"])
 
-# Explanation for the modes
-if mode == "Interval":
-    st.markdown("""
-    **Interval Mode**: This mode uses an interval for the estimates of sensitivity and specificity. 
-    You input the values for sensitivity and specificity along with their widths (W), which represent the tolerance or uncertainty in these estimates. 
-    If you'd like, you can specify different widths for sensitivity and specificity.
-    This mode is useful when you want to consider ranges for the accuracy values (sensitivity and specificity) rather than fixed points.
-    """)
-    
-else:
-    st.markdown("""
-    **Threshold Mode**: This mode allows you to set a threshold for sensitivity and specificity. 
-    The thresholds are the minimum acceptable values for these metrics. 
-    Based on these thresholds, the corresponding sensitivity, specificity, and widths are calculated automatically. 
-    This mode is useful when you want to focus on values that exceed a certain threshold, typically for high-confidence estimates.
-    """)
-
 if mode == "Interval":  # Interval mode
     st.subheader("Interval Mode")
+    st.tooltip("In this mode, you enter a range (width) for sensitivity and specificity. "
+               "It helps calculate the necessary number of individuals for each group based on the sensitivity and specificity estimates.")
+
     col1, col2 = st.columns(2)
     with col1:
         sensitivity = st.number_input(
@@ -79,33 +65,19 @@ if mode == "Interval":  # Interval mode
             help="The significance level (alpha) is the probability of rejecting the null hypothesis when it is true. "
                  "A common choice is 0.05 (5% significance level)."
         )
-    
-    use_different_widths = st.checkbox("Use different width values for Sensitivity and Specificity?")
-    if use_different_widths:
-        col5, col6 = st.columns(2)
-        with col5:
-            W_sens = st.number_input(
-                "W for Sensitivity (positive value):",
-                min_value=0.001, max_value=1.0, value=0.01, step=0.01,
-                help="The width parameter for sensitivity sets the tolerance for its interval estimate."
-            )
-        with col6:
-            W_spec = st.number_input(
-                "W for Specificity (positive value):",
-                min_value=0.001, max_value=1.0, value=0.01, step=0.01,
-                help="The width parameter for specificity sets the tolerance for its interval estimate."
-            )
-    else:
+    with col4:
         W = st.number_input(
             "W (positive value):",
             min_value=0.001, max_value=1.0, value=0.01, step=0.01,
-            help="The width (W) parameter sets the tolerance for both sensitivity and specificity estimates."
+            help="The width (W) parameter sets the tolerance for the interval of the sensitivity and specificity estimates."
         )
-        W_sens = W
-        W_spec = W
-
+    W_sens = W
+    W_spec = W
 else:  # Threshold mode
     st.subheader("Threshold Mode")
+    st.tooltip("In this mode, you specify a minimum threshold for sensitivity and specificity, "
+               "which will be converted into actual sensitivity and specificity values and their respective width values.")
+
     col1, col2 = st.columns(2)
     with col1:
         sensitivity_threshold = st.number_input(
