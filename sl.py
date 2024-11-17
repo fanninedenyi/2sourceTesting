@@ -41,8 +41,8 @@ mode = st.radio("Select input mode:", options=["Interval", "Threshold"])
 if mode == "Interval":  # Interval mode
     st.subheader("Interval Mode")
     st.markdown("""
-    **In this mode, you enter a range (width) for sensitivity and specificity,** 
-    which helps calculate the necessary number of individuals for each group.
+    **In this mode, you enter a range (width) for sensitivity and specificity,
+    which helps calculate the necessary number of individuals for each group.** 
     """)
     
     col1, col2 = st.columns(2)
