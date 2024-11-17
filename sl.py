@@ -36,16 +36,18 @@ def compute_values(sensitivity, specificity, alpha, W, prevalence_group1, preval
 st.title("Test Accuracy Calculator")
 
 # Slider for mode selection
-mode = st.slider("Select input mode:", 0, 1, 0, format="Interval" if _ == 0 else "Threshold")
+mode_labels = {0: "Interval", 1: "Threshold"}
+mode = st.slider("Select input mode:", min_value=0, max_value=1, value=0, format_func=lambda x: mode_labels[x])
 
-if choice == "Interval":
+if mode == 0:  # Interval mode
+    st.subheader("Interval Mode")
     col1, col2 = st.columns(2)
     with col1:
         sensitivity = st.number_input("Sensitivity (0 to 1):", 0.0, 1.0, 0.99, 0.01)
     with col2:
         specificity = st.number_input("Specificity (0 to 1):", 0.0, 1.0, 0.99, 0.01)
     W = st.number_input("W (positive value):", 0.001, 1.0, 0.01, 0.01)
-else:
+else:  # Threshold mode
     col1, col2 = st.columns(2)
     with col1:
         sensitivity_threshold = st.number_input("Sensitivity Threshold (0 to 1):", 0.0, 1.0, 0.9, 0.01)
