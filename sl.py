@@ -96,8 +96,10 @@ if mode == "Interval":  # Interval mode
 
 else:  # Threshold mode
     st.subheader("Threshold Mode")
-    st.help("In this mode, you set a threshold for sensitivity and specificity. These thresholds are used to calculate the necessary sample sizes.")
-
+    st.markdown("""
+    **In this mode, you set a threshold for sensitivity and specificity. These thresholds are used to calculate the necessary sample sizes.**
+    """)
+    
     col1, col2 = st.columns(2)
     with col1:
         sensitivity_threshold = st.number_input(
