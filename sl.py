@@ -159,8 +159,15 @@ if st.button("Calculate") and valid_input:
     with col8:
         st.markdown(f"""
         <div style="border: 2px solid #2196F3; padding: 10px; border-radius: 10px;">
-            <h3 style="text-align:
-                    <h3 style="text-align: center; color: #FFC107;">Estimated Gain</h3>
+            <h3 style="text-align: center; color: #2196F3;">People from Group 2</h3>
+            <h1 style="text-align: center;">{people_from_group2}</h1>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Display Estimated Gain
+    st.markdown(f"""
+    <div style="border: 2px solid #FFC107; padding: 10px; border-radius: 10px;">
+        <h3 style="text-align: center; color: #FFC107;">Estimated Gain</h3>
         <h2 style="text-align: center;">{gain} individuals</h2>
     </div>
     """, unsafe_allow_html=True)
