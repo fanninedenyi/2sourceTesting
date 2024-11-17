@@ -3,10 +3,10 @@ import scipy.stats as stats
 import streamlit as st
 
 # Function to compute necessary values
-def compute_values(sensitivity, specificity, alpha, W, prevalence_group1, prevalence_group2):
+def compute_values(sensitivity, specificity, alpha, W_sens, W_spec, prevalence_group1, prevalence_group2):
     Z = stats.norm.ppf(1 - alpha / 2)
-    M1 = ((Z ** 2 * sensitivity * (1 - sensitivity)) / W ** 2)
-    M2 = ((Z ** 2 * specificity * (1 - specificity)) / W ** 2)
+    M1 = ((Z ** 2 * sensitivity * (1 - sensitivity)) / W_sens ** 2)
+    M2 = ((Z ** 2 * specificity * (1 - specificity)) / W_spec ** 2)
     ideal_proportion = M1 / (M1 + M2)
     people_from_group1 = people_from_group2 = 0
 
@@ -68,6 +68,8 @@ if mode == "Interval":  # Interval mode
             min_value=0.001, max_value=1.0, value=0.01, step=0.01,
             help="The width (W) parameter sets the tolerance for the interval of the sensitivity and specificity estimates."
         )
+    W_sens = W
+    W_spec = W
 else:  # Threshold mode
     st.subheader("Threshold Mode")
     col1, col2 = st.columns(2)
@@ -92,9 +94,10 @@ else:  # Threshold mode
     )
 
     # Convert thresholds to sensitivity, specificity, and width
-    sensitivity = sensitivity_threshold
-    specificity = specificity_threshold
-    W = 1 - sensitivity_threshold  # Adjusted to align with threshold logic
+    sensitivity = (sensitivity_threshold + 1)/2
+    specificity = (specificity_threshold +1)/2
+    W_sens = (1 - sensitivity_threshold) / 2  # Adjusted to align with threshold logic
+    W_pec = (1 - specificity_threshold) / 2  # Adjusted to align with threshold logic
 
 col5, col6 = st.columns(2)
 with col5:
@@ -119,7 +122,7 @@ if (prevalence_group1 == 0 and prevalence_group2 == 0) or (prevalence_group1 == 
 
 if st.button("Calculate") and valid_input:
     people_from_group1, people_from_group2, gain = compute_values(
-        sensitivity, specificity, alpha, W, prevalence_group1, prevalence_group2
+        sensitivity, specificity, alpha, W_sens, W_spec, prevalence_group1, prevalence_group2
     )
 
     col7, col8 = st.columns(2)
