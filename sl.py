@@ -62,14 +62,31 @@ if mode == "Interval":  # Interval mode
             help="The significance level (alpha) is the probability of rejecting the null hypothesis when it is true. "
                  "A common choice is 0.05 (5% significance level)."
         )
-    with col4:
+    
+    use_different_widths = st.checkbox("Use different width values for Sensitivity and Specificity?")
+    if use_different_widths:
+        col5, col6 = st.columns(2)
+        with col5:
+            W_sens = st.number_input(
+                "W for Sensitivity (positive value):",
+                min_value=0.001, max_value=1.0, value=0.01, step=0.01,
+                help="The width parameter for sensitivity sets the tolerance for its interval estimate."
+            )
+        with col6:
+            W_spec = st.number_input(
+                "W for Specificity (positive value):",
+                min_value=0.001, max_value=1.0, value=0.01, step=0.01,
+                help="The width parameter for specificity sets the tolerance for its interval estimate."
+            )
+    else:
         W = st.number_input(
             "W (positive value):",
             min_value=0.001, max_value=1.0, value=0.01, step=0.01,
-            help="The width (W) parameter sets the tolerance for the interval of the sensitivity and specificity estimates."
+            help="The width (W) parameter sets the tolerance for both sensitivity and specificity estimates."
         )
-    W_sens = W
-    W_spec = W
+        W_sens = W
+        W_spec = W
+
 else:  # Threshold mode
     st.subheader("Threshold Mode")
     col1, col2 = st.columns(2)
