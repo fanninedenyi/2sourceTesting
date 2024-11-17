@@ -97,7 +97,7 @@ else:  # Threshold mode
     sensitivity = (sensitivity_threshold + 1)/2
     specificity = (specificity_threshold +1)/2
     W_sens = (1 - sensitivity_threshold) / 2  # Adjusted to align with threshold logic
-    W_pec = (1 - specificity_threshold) / 2  # Adjusted to align with threshold logic
+    W_spec = (1 - specificity_threshold) / 2  # Adjusted to align with threshold logic
 
 col5, col6 = st.columns(2)
 with col5:
