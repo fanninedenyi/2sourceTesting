@@ -35,8 +35,8 @@ def compute_values(sensitivity, specificity, alpha, W, prevalence_group1, preval
 # Streamlit UI
 st.title("Test Accuracy Calculator")
 
-# User choice for interval or threshold
-choice = st.radio("Choose your input mode:", ("Interval", "Threshold"))
+# Slider for mode selection
+mode = st.slider("Select input mode:", 0, 1, 0, format="Interval" if _ == 0 else "Threshold")
 
 if choice == "Interval":
     col1, col2 = st.columns(2)
