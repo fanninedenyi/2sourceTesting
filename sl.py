@@ -74,14 +74,22 @@ else:  # Threshold mode
     with col1:
         sensitivity_threshold = st.number_input(
             "Sensitivity Threshold (0 to 1):",
-            min_value=0.0, max_value=1.0, value=0.9, step=0.01,
+            min_value=0.0, max_value=1.0, value=0.98, step=0.01,
             help="Minimum threshold for sensitivity."
         )
     with col2:
         specificity_threshold = st.number_input(
             "Specificity Threshold (0 to 1):",
-            min_value=0.0, max_value=1.0, value=0.9, step=0.01,
+            min_value=0.0, max_value=1.0, value=0.98, step=0.01,
             help="Minimum threshold for specificity."
+        )
+    col3 = st.columns(1)
+    with col3:
+        alpha = st.number_input(
+            "Significance level alpha (0 to 1):",
+            min_value=0.0, max_value=1.0, value=0.05, step=0.05,
+            help="The significance level (alpha) is the probability of rejecting the null hypothesis when it is true. "
+                 "A common choice is 0.05 (5% significance level)."
         )
 
     # Convert thresholds to sensitivity, specificity, and width
