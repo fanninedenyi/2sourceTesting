@@ -40,8 +40,9 @@ mode = st.radio("Select input mode:", options=["Interval", "Threshold"])
 
 if mode == "Interval":  # Interval mode
     st.subheader("Interval Mode")
-    st.tooltip("In this mode, you enter a range (width) for sensitivity and specificity. "
-               "It helps calculate the necessary number of individuals for each group based on the sensitivity and specificity estimates.")
+    st.markdown("""
+    <p style="font-size: 14px; color: #888;">In this mode, you enter a range (width) for sensitivity and specificity. It helps calculate the necessary number of individuals for each group based on the sensitivity and specificity estimates.</p>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -75,8 +76,9 @@ if mode == "Interval":  # Interval mode
     W_spec = W
 else:  # Threshold mode
     st.subheader("Threshold Mode")
-    st.tooltip("In this mode, you specify a minimum threshold for sensitivity and specificity, "
-               "which will be converted into actual sensitivity and specificity values and their respective width values.")
+    st.markdown("""
+    <p style="font-size: 14px; color: #888;">In this mode, you specify a minimum threshold for sensitivity and specificity, which will be converted into actual sensitivity and specificity values and their respective width values.</p>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
