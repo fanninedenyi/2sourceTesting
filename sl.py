@@ -84,7 +84,6 @@ else:  # Threshold mode
             help="Minimum threshold for specificity."
         )
 
-    col3 = st.columns(1)
     alpha = st.number_input(
         "Significance level alpha (0 to 1):",
         min_value=0.0, max_value=1.0, value=0.05, step=0.05,
@@ -93,8 +92,54 @@ else:  # Threshold mode
     )
 
     # Convert thresholds to sensitivity, specificity, and width
-    sensitivity = (sensitivity_threshold + 1) / 2
-    specificity = (specificity_threshold + 1) / 2
-    W = (1 - sensitivity_threshold) / 2
+    sensitivity = sensitivity_threshold
+    specificity = specificity_threshold
+    W = 1 - sensitivity_threshold  # Adjusted to align with threshold logic
 
-# The rest of the code remains unchanged...
+col5, col6 = st.columns(2)
+with col5:
+    prevalence_group1 = st.number_input(
+        "Prevalence in group 1 (0 to 1):",
+        min_value=0.0, max_value=1.0, value=0.1, step=0.05,
+        help="Prevalence is the proportion of sick individuals in the first population."
+    )
+with col6:
+    prevalence_group2 = st.number_input(
+        "Prevalence in group 2 (0 to 1):",
+        min_value=0.0, max_value=1.0, value=0.65, step=0.05,
+        help="Prevalence is the proportion of sick individuals in the second population."
+    )
+
+# Validate input based on the combination of both prevalences
+valid_input = True
+
+if (prevalence_group1 == 0 and prevalence_group2 == 0) or (prevalence_group1 == 1 and prevalence_group2 == 1):
+    st.error("Both prevalence values cannot be 0 or 1 at the same time. This is not valid.")
+    valid_input = False
+
+if st.button("Calculate") and valid_input:
+    people_from_group1, people_from_group2, gain = compute_values(
+        sensitivity, specificity, alpha, W, prevalence_group1, prevalence_group2
+    )
+
+    col7, col8 = st.columns(2)
+    with col7:
+        st.markdown(f"""
+        <div style="border: 2px solid #4CAF50; padding: 10px; border-radius: 10px;">
+            <h3 style="text-align: center; color: #4CAF50;">People from Group 1</h3>
+            <h1 style="text-align: center;">{people_from_group1}</h1>
+        </div>
+        """, unsafe_allow_html=True)
+    with col8:
+        st.markdown(f"""
+        <div style="border: 2px solid #2196F3; padding: 10px; border-radius: 10px;">
+            <h3 style="text-align: center; color: #2196F3;">People from Group 2</h3>
+            <h1 style="text-align: center;">{people_from_group2}</h1>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div style="background-color: #FFC107; padding: 15px; border-radius: 10px; margin-top: 20px;">
+        <h2 style="text-align: center; color: #000;">Gain from using both sources: <b>{gain}</b></h2>
+    </div>
+    """, unsafe_allow_html=True)
